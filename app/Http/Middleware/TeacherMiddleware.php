@@ -3,10 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
-use Illuminate\Support\Facades\Auth as SupportFacadesAuth;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class TeacherMiddleware
@@ -18,8 +16,8 @@ class TeacherMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user =Auth::user();
-        if($user->user_type !=="teacher"){
+        $user = Auth::user();
+        if($user->user_type !== "teacher"){
         return redirect('/');
         }
         return $next($request);

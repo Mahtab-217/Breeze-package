@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\StudetnsController;
+use App\Http\Middleware\TeacherMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,7 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::prefix('user')->controller(StudentsController::class)->middleware('auth')->group(function(){
+Route::prefix('user')->controller(StudetnsController::class)->middleware('teacher')->group(function(){
 Route::get('/','index');
 });
 // Route::get('/user',[StudentsController::class,'index'])->middleware('auth');
